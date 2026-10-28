@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ц. Жаргал | Сүүний аж ахуй
 
-## Getting Started
+Ц. Жаргалын сүүний үхрийн фермийн вебсайт (Зөөлөн байгаль ХХК). Монгол хэл дээрх, SEO-д бэлэн, админ самбартай сайт.
 
-First, run the development server:
+**Технологи:** Next.js 16 (App Router, Cache Components) · TypeScript · Tailwind CSS 4 · PostgreSQL · Vercel Blob (заавал биш)
+
+## Агуулга
+
+| Хаяг | Хуудас |
+| --- | --- |
+| `/` | Нүүр хуудас |
+| `/fermiin-tukhai` | Фермийн тухай |
+| `/tekhnologi` | Технологи ба үйл ажиллагаа |
+| `/medlegiin-san`, `/medlegiin-san/[slug]` | Мэдлэгийн сан (нийтлэл) |
+| `/galerei` | Зураг, видео |
+| `/surgalt-zuvlugee` | Сургалт, зөвлөх үйлчилгээ + “Сонирхлоо илэрхийлэх” форм |
+| `/hamtran-ajillah` | Бизнесийн хамтын ажиллагааны хүсэлтийн форм |
+| `/holboo-barih` | Холбоо барих |
+| `/admin` | Админ самбар (нууц үгтэй, search engine-д хаалттай) |
+
+Мөн `sitemap.xml`, `robots.txt`, Open Graph, canonical, JSON-LD (Organization, WebSite, Person, Article, BreadcrumbList) автоматаар үүснэ.
+
+## Орон нутагт ажиллуулах
 
 ```bash
+npm install
+cp .env.example .env.local      # утгуудыг бөглөнө
+npm run db:setup                # хүснэгт үүсгэж, эхний нийтлэл/үйлчилгээг оруулна
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+PostgreSQL байхгүй бол (`DATABASE_URL` хоосон) сайт нийтийн хэсгийг анхдагч агуулгаар харуулна, гэхдээ форм болон админ хадгалах боломжгүй.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Орчны хувьсагчид
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Нэр | Тайлбар |
+| --- | --- |
+| `DATABASE_URL` | PostgreSQL холболт (Neon, Supabase, Vercel Postgres гэх мэт) |
+| `ADMIN_PASSWORD` | Админ нууц үг |
+| `SESSION_SECRET` | 24+ тэмдэгт санамсаргүй утга (cookie гарын үсэгт) |
+| `NEXT_PUBLIC_SITE_URL` | Сайтын бүтэн хаяг, жишээ нь `https://jargal-farm.mn` |
+| `BLOB_READ_WRITE_TOKEN` | Зураг/видео файл оруулахад (Vercel Blob). Байхгүй бол зөвхөн холбоос (URL) ашиглана |
 
-## Learn More
+Нууц үг, түлхүүрийг кодонд хадгалаагүй; `.env*` файлууд git-д орохгүй.
 
-To learn more about Next.js, take a look at the following resources:
+## Vercel дээр байршуулах
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. GitHub репогоо Vercel дээр **Add New → Project** гэж импортлоно.
+2. Өгөгдлийн сан үүсгэнэ (Vercel Marketplace-ийн Neon гэх мэт) → `DATABASE_URL`.
+3. Дээрх орчны хувьсагчдыг **Settings → Environment Variables**-д нэмнэ.
+4. Өөрийн компьютерээс нэг удаа хүснэгт үүсгэнэ: `DATABASE_URL=... npm run db:setup`.
+5. Deploy хийнэ. Домэйнээ **Settings → Domains**-аас холбоно, дараа нь `NEXT_PUBLIC_SITE_URL`-ээ шинэчилнэ.
+6. Зураг оруулахын тулд Vercel дээр **Storage → Blob** үүсгэж `BLOB_READ_WRITE_TOKEN`-ыг холбоно.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> Build хийхээс өмнө `db:setup` ажилласан байх ёстой, учир нь нийтлэлүүд build үед өгөгдлийн сангаас уншигдана.
 
-## Deploy on Vercel
+## Админ самбар
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`/admin` руу `ADMIN_PASSWORD`-оор нэвтэрнэ. Эндээс:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Нийтлэл** — нэмэх, засах, устгах, ноорог/нийтлэгдсэн төлөв, SEO гарчиг/тайлбар
+- **Зураг, видео** — файл оруулах эсвэл холбоос (YouTube-ийн холбоос шууд тоглогдоно). Фермийн бодит бус материалыг “Жишээ” гэж тэмдэглэнэ
+- **Үйлчилгээ** — сургалт, зөвлөгөөний мэдээлэл, үнэ, хуваарь (эзэн баталгаажуулсны дараа)
+- **Сайтын мэдээлэл** — нүүр хуудасны текст, холбоо барих мэдээлэл, үндсэн зургууд
+- **Хүсэлтүүд** — формоор ирсэн хамтын ажиллагаа, сонирхол, мессеж
+
+Файлын хязгаар 4 MB (Vercel-ийн хүсэлтийн хязгаар). Том видеог YouTube-д байршуулаад холбоосыг оруулна.
+
+## Түр орлуулагчид (эзний мэдээлэл хүлээгдэж байгаа)
+
+Дараах зүйлсийг зохиож бөглөөгүй, сайт дээр шар хүрээтэй “Эзний мэдээлэл хүлээгдэж байна” эсвэл тасархай хүрээтэй “Бодит зураг оруулах байрлал” гэж харагдана:
+
+- Ц. Жаргалын хөрөг, үнээ, саалтуур, бууц зайлуулах систем, фермийн орчин, тэжээлийн зураг, видео → **Админ → Сайтын мэдээлэл / Зураг, видео**
+- Утас, имэйл, Facebook, байршил, ажиллах цаг → **Админ → Сайтын мэдээлэл**
+- Фермийн үүсэл, түүх; саалтуурын брэнд, хүчин чадал; ажлын цагийн хуваарь → `src/app/(site)/fermiin-tukhai`, `tekhnologi` дахь “Эзний мэдээлэл хүлээгдэж байна” хэсгүүд
+- Сургалтын үнэ, хуваарь → **Админ → Үйлчилгээ**
+
+## Агуулгын зарчим
+
+Зөвхөн баталгаатай мэдээлэл: 15 жилийн туршлага, ойролцоогоор 50 саалийн үнээ, саалтуурын төхөөрөмж, бууцыг усаар зайлуулах систем, сүүний үйлдвэрт нийлүүлдэг. Нийт сүргийн тоо, орлого, гэрчилгээ, шагнал, малын эрүүл мэндийн үзүүлэлт, байгаль орчны баталгаагүй мэдэгдлийг оруулаагүй. Нийтлэлүүд ерөнхий туршлагын шинжтэй бөгөөд эмчилгээ, тэжээлийн норм, эмийн тун агуулаагүй; эдгээр нь **Ц. Жаргал уншиж, баталгаажуулсны дараа** нийтлэхэд тохиромжтой эхний ноорог.
+
+## Ирээдүйн өргөтгөл
+
+Өгөгдлийн сан, `src/lib/data.ts` давхарга нь малын бүртгэл, саалийн гарц, зардал, тугаллалт, эмчилгээний түүх, сургалтын төлбөрийн систем зэргийг нэмэхэд бэлэн суурь. Эдгээрийг одоогоор бүтээгээгүй.
+
+## Скриптүүд
+
+`npm run dev` · `npm run build` · `npm run start` · `npm run lint` · `npm run db:setup`
