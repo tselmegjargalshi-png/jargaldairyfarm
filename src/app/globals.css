@@ -3,15 +3,15 @@
 :root {
   --milk: #faf8f3;
   --paper: #ffffff;
-  --ink: #1d2a22;
+  --ink: #26322b;
   --muted: #5d6a62;
   --line: #e3e1d8;
   --stone: #eceae3;
-  --green-900: #0f2e22;
-  --green-800: #17402f;
-  --green-700: #1f5a43;
-  --green-600: #2b7355;
-  --green-100: #e3efe8;
+  --green-900: #36604d;
+  --green-800: #3f6b56;
+  --green-700: #46755e;
+  --green-600: #5e8f77;
+  --green-100: #e8f0eb;
   --gold: #b8883a;
   --gold-soft: #f3e9d2;
 }
@@ -49,8 +49,8 @@ body {
 h1, h2, h3 {
   font-family: var(--font-serif);
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  line-height: 1.25;
+  letter-spacing: 0;
   text-wrap: balance;
 }
 
