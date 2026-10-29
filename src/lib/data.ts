@@ -63,6 +63,7 @@ function toInquiry(r: Row): Inquiry {
     phone: r.phone as string,
     email: r.email as string,
     topic: r.topic as string,
+    preferredTime: r.preferred_time as string,
     message: r.message as string,
     status: r.status as Inquiry["status"],
     createdAt: iso(r.created_at),

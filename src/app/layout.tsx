@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Playfair_Display } from "next/font/google";
+import { Manrope, Noto_Serif } from "next/font/google";
 import "./globals.css";
 import { site, siteUrl } from "@/lib/site";
 
 const body = Manrope({ variable: "--font-body", subsets: ["cyrillic", "latin"], display: "swap" });
-const display = Playfair_Display({
+const display = Noto_Serif({
   variable: "--font-display",
   subsets: ["cyrillic", "latin"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#17402f",
+  themeColor: "#36604d",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -80,7 +80,7 @@ export type SiteSettings = {
   images: SiteImages;
 };
 
-export type InquiryKind = "partnership" | "interest" | "contact";
+export type InquiryKind = "partnership" | "interest" | "contact" | "meeting" | "training";
 export type InquiryStatus = "new" | "read" | "archived";
 
 export type Inquiry = {
@@ -91,6 +91,7 @@ export type Inquiry = {
   phone: string;
   email: string;
   topic: string;
+  preferredTime: string;
   message: string;
   status: InquiryStatus;
   createdAt: string;

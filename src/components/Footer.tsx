@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cacheLife } from "next/cache";
 import { getSettings } from "@/lib/data";
@@ -19,6 +20,13 @@ export async function Footer() {
     <footer className="mt-24 bg-green-900 text-white/85">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-3">
         <div>
+          <Image
+            src="/logo.png"
+            alt={`${site.legalName} лого`}
+            width={700}
+            height={423}
+            className="mb-5 h-auto w-44 rounded-xl bg-white p-3"
+          />
           <p className="font-serif text-2xl text-white">{site.shortName}</p>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-soft">Сүүний аж ахуй</p>
           <p className="mt-4 text-sm leading-relaxed">{site.tagline}</p>
@@ -31,6 +39,8 @@ export async function Footer() {
                 <Link href={n.href} className="hover:text-white hover:underline">{n.label}</Link>
               </li>
             ))}
+            <li><Link href="/surgalt-zuvlugee#burtgel" className="hover:text-white hover:underline">Сургалтад бүртгүүлэх</Link></li>
+            <li><Link href="/surgalt-zuvlugee#uulzalt" className="hover:text-white hover:underline">Уулзалтын цаг товлох</Link></li>
             <li><Link href="/holboo-barih" className="hover:text-white hover:underline">Холбоо барих</Link></li>
           </ul>
         </nav>

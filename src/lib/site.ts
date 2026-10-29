@@ -22,7 +22,7 @@ export const nav = [
   { href: "/tekhnologi", label: "Технологи" },
   { href: "/medlegiin-san", label: "Мэдлэгийн сан" },
   { href: "/galerei", label: "Зураг, видео" },
-  { href: "/surgalt-zuvlugee", label: "Сургалт, зөвлөгөө" },
+  { href: "/surgalt-zuvlugee", label: "Сургалт, уулзалт" },
   { href: "/hamtran-ajillah", label: "Хамтран ажиллах" },
 ] as const;
 
@@ -54,6 +54,24 @@ export const partnershipTypes = [
   "Фермер",
   "Судалгаа, сургалтын байгууллага",
   "Бусад",
+] as const;
+
+export const meetingTypes = [
+  "Фермтэй газар дээр нь танилцах",
+  "Онлайн уулзалт",
+  "Утсаар зөвлөгөө авах",
+  "Бизнесийн уулзалт",
+] as const;
+
+export const dayParts = ["Өглөө", "Өдөр", "Орой"] as const;
+
+export const trainingTopics = [
+  "Ферм эхлүүлэх зөвлөгөө",
+  "Фермийн өдөр тутмын ажиллагааны туршлага",
+  "Тоног төхөөрөмжийн сонголтын туршлага",
+  "Фермтэй танилцах хөтөлбөр",
+  "Онлайн сургалт",
+  "Фермерүүдийн туршлага солилцох уулзалт",
 ] as const;
 
 export function mediaCategoryLabel(slug: string): string {

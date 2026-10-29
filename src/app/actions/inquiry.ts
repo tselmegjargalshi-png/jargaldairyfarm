@@ -20,7 +20,9 @@ export async function submitInquiry(_prev: FormState, formData: FormData): Promi
       const key = String(issue.path[0] ?? "form");
       errors[key] ??= issue.message;
     }
-    return { ok: false, message: "Талбаруудыг шалгана уу.", errors };
+    const values: Record<string, string> = {};
+    for (const [k, val] of formData.entries()) if (typeof val === "string" && k !== "website") values[k] = val;
+    return { ok: false, message: "Талбаруудыг шалгана уу.", errors, values };
   }
 
   if (!hasDatabase()) {
@@ -43,12 +45,15 @@ export async function submitInquiry(_prev: FormState, formData: FormData): Promi
       return { ok: false, message: "Хэт олон хүсэлт илгээлээ. Түр хүлээгээд дахин оролдоно уу." };
     }
     const v = parsed.data;
-    await db`insert into inquiries (kind, org_name, contact_name, phone, email, topic, message, ip_hash)
-      values (${v.kind}, ${v.orgName}, ${v.contactName}, ${v.phone}, ${v.email}, ${v.topic}, ${v.message}, ${ipHash})`;
+    const preferredTime = v.kind === "meeting" ? `${v.preferredDate}, ${v.preferredPart}` : "";
+    await db`insert into inquiries (kind, org_name, contact_name, phone, email, topic, preferred_time, message, ip_hash)
+      values (${v.kind}, ${v.orgName}, ${v.contactName}, ${v.phone}, ${v.email}, ${v.topic}, ${preferredTime}, ${v.message}, ${ipHash})`;
   } catch (err) {
     console.error("inquiry insert failed", err);
     return { ok: false, message: "Хүсэлтийг хадгалж чадсангүй. Түр хүлээгээд дахин оролдоно уу." };
   }
 
-  return { ok: true, message: "Баярлалаа! Таны хүсэлтийг хүлээн авлаа. Бид тантай эргэн холбогдох болно." };
+  return { ok: true, message: parsed.data.kind === "meeting"
+    ? "Баярлалаа! Уулзалтын хүсэлтийг хүлээн авлаа. Ц. Жаргал цагийг баталгаажуулахаар тантай холбогдоно."
+    : "Баярлалаа! Таны хүсэлтийг хүлээн авлаа. Бид тантай эргэн холбогдох болно." };
 }

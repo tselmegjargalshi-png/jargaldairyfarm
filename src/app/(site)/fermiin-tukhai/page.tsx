@@ -55,7 +55,7 @@ export default async function AboutPage() {
               </Pending>
             </div>
             {s.founderQuote && (
-              <blockquote className="mt-8 border-l-4 border-gold pl-5 font-serif text-xl italic text-green-900">
+              <blockquote className="mt-8 border-l-4 border-gold pl-5 font-serif text-xl text-green-900">
                 “{s.founderQuote}” <footer className="mt-2 text-sm not-italic text-muted">— Ц. Жаргал</footer>
               </blockquote>
             )}

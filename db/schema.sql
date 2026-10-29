@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS services (
 
 CREATE TABLE IF NOT EXISTS inquiries (
   id serial PRIMARY KEY,
-  kind text NOT NULL CHECK (kind IN ('partnership','interest','contact')),
+  kind text NOT NULL,
   org_name text NOT NULL DEFAULT '',
   contact_name text NOT NULL,
   phone text NOT NULL DEFAULT '',
@@ -62,3 +62,9 @@ CREATE TABLE IF NOT EXISTS inquiries (
 );
 CREATE INDEX IF NOT EXISTS inquiries_created_idx ON inquiries (created_at DESC);
 CREATE INDEX IF NOT EXISTS inquiries_ip_idx ON inquiries (ip_hash, created_at);
+
+-- Added after first release: preferred meeting time + new inquiry kinds (idempotent)
+ALTER TABLE inquiries ADD COLUMN IF NOT EXISTS preferred_time text NOT NULL DEFAULT '';
+ALTER TABLE inquiries DROP CONSTRAINT IF EXISTS inquiries_kind_check;
+ALTER TABLE inquiries ADD CONSTRAINT inquiries_kind_check
+  CHECK (kind IN ('partnership','interest','contact','meeting','training'));

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -17,13 +18,16 @@ export function Header() {
       >
         Агуулга руу шилжих
       </a>
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <Link href="/" className="flex flex-col leading-tight" onClick={() => setOpen(false)}>
-          <span className="font-serif text-lg font-semibold text-green-900">{site.shortName}</span>
-          <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-gold">Сүүний аж ахуй</span>
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
+        <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)} aria-label={`${site.name} — нүүр хуудас`}>
+          <Image src="/logo-mark.png" alt="" width={52} height={52} className="h-12 w-12 object-contain" priority />
+          <span className="flex flex-col whitespace-nowrap leading-tight">
+            <span className="font-serif text-lg font-semibold text-green-900">{site.shortName}</span>
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-gold">Сүүний аж ахуй</span>
+          </span>
         </Link>
 
-        <nav aria-label="Үндсэн цэс" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Үндсэн цэс" className="hidden items-center gap-1 xl:flex">
           {nav.map((item) => {
             const active = pathname === item.href || pathname.startsWith(item.href + "/");
             return (
@@ -31,7 +35,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors hover:bg-green-100 ${
+                className={`whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-green-100 ${
                   active ? "bg-green-100 text-green-900" : "text-ink/80"
                 }`}
               >
@@ -39,14 +43,14 @@ export function Header() {
               </Link>
             );
           })}
-          <Link href="/holboo-barih" className="btn btn-primary ml-2 !min-h-10 !px-5 !py-2 text-sm">
+          <Link href="/holboo-barih" className="btn btn-primary ml-2 !min-h-10 whitespace-nowrap !px-5 !py-2 text-sm">
             Холбоо барих
           </Link>
         </nav>
 
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-lg border border-line lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-lg border border-line xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Цэсийг хаах" : "Цэсийг нээх"}
@@ -59,7 +63,7 @@ export function Header() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Гар утасны цэс" className="border-t border-line bg-milk lg:hidden">
+        <nav id="mobile-nav" aria-label="Гар утасны цэс" className="border-t border-line bg-milk xl:hidden">
           <ul className="mx-auto flex max-w-6xl flex-col px-5 py-3 sm:px-8">
             {[...nav, { href: "/holboo-barih", label: "Холбоо барих" }].map((item) => (
               <li key={item.href}>

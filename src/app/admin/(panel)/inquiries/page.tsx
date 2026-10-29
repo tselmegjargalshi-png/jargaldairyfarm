@@ -2,7 +2,7 @@ import { deleteInquiry, setInquiryStatus } from "@/app/actions/admin";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import { adminInquiries } from "@/lib/data";
 
-const kindLabel = { partnership: "Хамтын ажиллагаа", interest: "Сонирхол", contact: "Мессеж" } as const;
+const kindLabel = { partnership: "Хамтын ажиллагаа", interest: "Сонирхол", contact: "Мессеж", meeting: "Уулзалт товлох", training: "Сургалтад бүртгүүлэх" } as const;
 
 export default async function InquiriesAdmin() {
   const items = await adminInquiries();
@@ -25,6 +25,7 @@ export default async function InquiriesAdmin() {
               {i.email && <a href={`mailto:${i.email}`} className="underline">{i.email}</a>}
             </p>
             {i.topic && <p className="mt-2 text-sm"><span className="text-muted">Төрөл: </span>{i.topic}</p>}
+            {i.preferredTime && <p className="mt-1 text-sm"><span className="text-muted">Хүссэн цаг: </span><strong>{i.preferredTime}</strong></p>}
             {i.message && <p className="mt-2 whitespace-pre-wrap">{i.message}</p>}
             <div className="mt-4 flex flex-wrap gap-2">
               {i.status !== "read" && <form action={setInquiryStatus.bind(null, i.id, "read")}><button className="btn btn-outline !min-h-9 !px-4 !py-1 text-sm">Уншсан</button></form>}

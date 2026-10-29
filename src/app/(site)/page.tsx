@@ -207,6 +207,24 @@ export default async function HomePage() {
         </Container>
       </section>
 
+      {/* Training & meetings */}
+      <section className="pb-4">
+        <Container>
+          <div className="grid gap-6 md:grid-cols-2">
+            <article className="rounded-2xl border border-line bg-paper p-8">
+              <h2 className="text-2xl text-green-900">Сургалтад бүртгүүлэх</h2>
+              <p className="mt-3 text-muted">Ферм эхлүүлэх зөвлөгөө, онлайн сургалт, фермтэй танилцах хөтөлбөрийн хүлээлгийн жагсаалтад бүртгүүлээрэй.</p>
+              <Link href="/surgalt-zuvlugee#burtgel" className="btn btn-primary mt-6">Бүртгүүлэх</Link>
+            </article>
+            <article className="rounded-2xl border border-line bg-paper p-8">
+              <h2 className="text-2xl text-green-900">Уулзалтын цаг товлох</h2>
+              <p className="mt-3 text-muted">Фермтэй газар дээр нь танилцах, онлайн эсвэл утсаар зөвлөгөө авах тохиромжтой цагаа сонгоно уу.</p>
+              <Link href="/surgalt-zuvlugee#uulzalt" className="btn btn-outline mt-6">Цаг товлох</Link>
+            </article>
+          </div>
+        </Container>
+      </section>
+
       {/* Collaboration CTA */}
       <section className="py-20">
         <Container>
