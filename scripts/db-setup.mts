@@ -6,6 +6,10 @@ import { defaultArticles, defaultServices, defaultSettings } from "../src/lib/se
 
 const url = process.env.DATABASE_URL;
 if (!url) {
+  if (process.argv.includes("--if-configured")) {
+    console.log("DATABASE_URL тохируулаагүй тул өгөгдлийн сангийн тохиргоог алгаслаа.");
+    process.exit(0);
+  }
   console.error("DATABASE_URL тохируулаагүй байна.");
   process.exit(1);
 }

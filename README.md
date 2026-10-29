@@ -48,11 +48,11 @@ PostgreSQL байхгүй бол (`DATABASE_URL` хоосон) сайт нийт
 1. GitHub репогоо Vercel дээр **Add New → Project** гэж импортлоно.
 2. Өгөгдлийн сан үүсгэнэ (Vercel Marketplace-ийн Neon гэх мэт) → `DATABASE_URL`.
 3. Дээрх орчны хувьсагчдыг **Settings → Environment Variables**-д нэмнэ.
-4. Өөрийн компьютерээс нэг удаа хүснэгт үүсгэнэ: `DATABASE_URL=... npm run db:setup`.
+4. Build үед хүснэгт автоматаар үүснэ.
 5. Deploy хийнэ. Домэйнээ **Settings → Domains**-аас холбоно, дараа нь `NEXT_PUBLIC_SITE_URL`-ээ шинэчилнэ.
 6. Зураг оруулахын тулд Vercel дээр **Storage → Blob** үүсгэж `BLOB_READ_WRITE_TOKEN`-ыг холбоно.
 
-> Build хийхээс өмнө `db:setup` ажилласан байх ёстой, учир нь нийтлэлүүд build үед өгөгдлийн сангаас уншигдана.
+> `npm run build` нь `DATABASE_URL` байвал хүснэгтийг автоматаар үүсгэнэ (давтан ажиллуулахад аюулгүй), тиймээс Vercel дээр тусад нь `db:setup` ажиллуулах шаардлагагүй.
 
 ## Админ самбар
 
